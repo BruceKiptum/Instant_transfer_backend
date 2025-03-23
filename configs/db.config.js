@@ -1,14 +1,17 @@
-const envUtils = require("profile-base/common/envUtils");
-const { Pool } = require("pg");
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-envUtils.loadEnv();
-const pool = new Pool({
-  user: envUtils.get("DATABASE_USER"),
-  host: envUtils.get("DATABASE_HOST"),
-  database: envUtils.get("DATABASE_NAME"),
-  password: envUtils.get("DATABASE_PASS"),
-  port: envUtils.get("DATABASE_PORT")
-});
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log("MongoDB Connected...");
+    } catch (error) {
+        console.error("MongoDB Connection Error:", error.message);
+        process.exit(1);
+    }
+};
 
-
-module.exports = pool;
+module.exports = connectDB;

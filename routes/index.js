@@ -1,6 +1,6 @@
 const express = require('express');
 const swaggerInitializer = require('../common/swagger.initializer');
-const dataRoutes = require('./dataRoutes');
+const authRoutes = require('./authRoutes');
 
 class ApiRoute {
   constructor() {
@@ -17,7 +17,7 @@ class ApiRoute {
       /**
        * Unified route - Base route handler.
        */
-      this.router.use('', dataRoutes);
+      this.router.use('', authRoutes);
 
       /**
        * Swagger API documentation initializer.

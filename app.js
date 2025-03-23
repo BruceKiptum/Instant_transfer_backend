@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const errorHandler = require("./middlewares/errorMiddleware");
 const logRequestResponse = require("./middlewares/loggerMiddleware");
+const cookieParser = require('cookie-parser');
 
 /**
  * Initializes and configures the Express app.
@@ -27,7 +28,8 @@ const setupApp = async (routes) => {
 
     // Middleware
     app.use(express.json());
-    app.use(logRequestResponse); // Request and response logging
+    app.use(logRequestResponse);
+    app.use(cookieParser());
 
     // Routes
     app.use("/", routes);
